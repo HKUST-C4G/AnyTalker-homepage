@@ -812,10 +812,16 @@
                 }
 
                 .grid {
-                    gap: 4px;
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    overflow: visible;
                 }
                 .flex {
-                    gap: 4px !important;
+                    gap: 16px !important;
                 }
 
                 .flex-mobile {
@@ -835,6 +841,15 @@
                 /* 优化视频播放器在移动端的显示 */
                 .video-player {
                     border-radius: 12px;
+                    width: 100%;
+                }
+                
+                /* 移除span类的特殊宽度，让所有视频在移动端都是全宽 */
+                .grid .span22,
+                .grid .span21,
+                .grid .span12 {
+                    grid-column: span 1;
+                    grid-row: span 1;
                 }
 
                 #long .text,
@@ -863,34 +878,23 @@
                     scroll-margin: 16px;
                 }
 
+                /* 移动端视频竖排显示，移除横向滚动 */
                 .grid:not(.grid-noslide) {
-                    display: flex;
-                    overflow-x: scroll;
-                    width: 100vw;
-                    margin-left: -16px;
-                    padding: 0 16px;
-                    scroll-snap-type: x mandatory;
-                    scrollbar-width: none;
-                    -webkit-overflow-scrolling: touch;
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    overflow: visible;
                 }
                 .grid:not(.grid-noslide) > * {
-                    width: calc(100vw - 64px);
-                    max-width: 400px;
-                    max-height: calc(100vh - 64px);
-                    flex-shrink: 0;
-                    scroll-snap-align: center;
-                    scroll-snap-stop: always;
-                    scroll-margin: 16px;
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: none;
                 }
-                .grid:not(.grid-noslide) .video-player:not(:first-of-type),
-                .grid:not(.grid-noslide) *:not(:first-of-type) .video-player {
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
-                .grid:not(.grid-noslide) .video-player:not(:last-of-type),
-                .grid:not(.grid-noslide) *:not(:last-of-type) .video-player {
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
+                .grid:not(.grid-noslide) .video-player {
+                    border-radius: 12px;
                 }
                 
                 /* 优化flex布局在移动端 */
@@ -927,14 +931,26 @@
                 }
 
                 #synthetic .grid {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 16px;
                     border-radius: 16px;
-                    overflow: hidden;
+                    overflow: visible;
                 }
                 #synthetic .video-player {
-                    border-radius: 0;
+                    border-radius: 12px;
                 }
                 #synthetic .flex > div:last-child {
                     display: none;
+                }
+                
+                /* 确保所有特殊网格在移动端都是单列 */
+                #camera-control .grid,
+                .grid2,
+                .grid3,
+                .grid4,
+                .grid5 {
+                    grid-template-columns: 1fr;
                 }
 
                 section:has(a.external) {
