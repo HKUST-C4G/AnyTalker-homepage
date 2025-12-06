@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>AnyTalker</title>
         <meta name="description" content="AnyTalker is a multi-person talking videos generation model.">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
         <meta name="theme-color" content="#000000">
 
 
@@ -79,11 +79,28 @@
                 width: 40px;
                 height: 40px;
             }
+            
+            @media (max-width: 640px) {
+                #logo {
+                    right: 0;
+                    padding: 16px 8px 8px 8px;
+                }
+                #logo svg {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
 
 
             section {
                 border-top: none;
                 padding: 48px calc(50vw - min(45vw, 1600px / 2));
+            }
+            
+            @media (max-width: 768px) {
+                section {
+                    padding: 32px 20px;
+                }
             }
 
             .text {
@@ -206,12 +223,19 @@
                 font-weight: 400;
                 margin: 0;
             }
-            p {
-                font-size: 16px;
-                color: #b9bbc6;
-                line-height: 25px;
-                font-weight: 300;
-            }
+                p {
+                    font-size: 16px;
+                    color: #b9bbc6;
+                    line-height: 25px;
+                    font-weight: 300;
+                }
+                
+                @media (max-width: 640px) {
+                    p {
+                        font-size: 14px;
+                        line-height: 22px;
+                    }
+                }
 
             .grid {
                 display: grid;
@@ -432,7 +456,7 @@
             body[muted=false] .audio-button {
                 background-image: url(assets/icons/unmute.svg);
             }
-            @media (min-width: 640px) {
+            @media (min-width: 641px) {
                 body[muted=false] .audio-control:hover {
                     transform: scale(1.05);
                     z-index: 1;
@@ -454,6 +478,12 @@
                 }
 
                 .mobile-only {
+                    display: none !important;
+                }
+            }
+            
+            @media (max-width: 640px) {
+                .desktop-only {
                     display: none !important;
                 }
             }
@@ -612,6 +642,25 @@
                 align-items: center;
                 border: none;
             }
+            
+            @media (max-width: 640px) {
+                #team {
+                    padding: 40px 16px 80px 16px;
+                }
+                #team h3 {
+                    font-size: 18px;
+                    margin-top: 40px;
+                }
+                #team h4 {
+                    font-size: 16px;
+                    margin-top: 24px;
+                }
+                #team li,
+                #team p {
+                    font-size: 14px;
+                    line-height: 24px;
+                }
+            }
             #team .content {
                 width: 100%;
             }
@@ -713,14 +762,48 @@
 
             @media (max-width: 640px) {
                 #intro h1 {
-                    font-size: 64px;
+                    font-size: 28px;
+                    margin: 60px 0 16px 0;
+                    line-height: 1.2;
+                    padding: 0 16px;
+                }
+                #intro h2 {
+                    font-size: 16px;
+                    margin: 16px 0 24px 0;
+                    padding: 0 16px;
+                }
+                #intro h3 {
+                    font-size: 24px;
+                    margin: 16px 0 24px 0;
                 }
                 #intro .background-video {
                     width: calc(100vw * (1 - var(--intro-scale)) + (100vw - 32px) * var(--intro-scale));
                 }
+                #intro .content {
+                    padding: 0 16px;
+                }
+                #intro .text {
+                    margin-bottom: 24px;
+                }
+                #intro .publication-authors {
+                    font-size: 12px !important;
+                    line-height: 1.6;
+                    padding: 0 8px;
+                }
+                #intro .publication-authors .author-block {
+                    display: inline-block;
+                    margin: 2px 0;
+                }
+                #intro .paper-button {
+                    display: block;
+                    width: calc(100% - 32px);
+                    margin: 8px auto;
+                    text-align: center;
+                    justify-content: center;
+                }
 
                 h1 {
-                    font-size: 24px;
+                    font-size: 22px;
                 }
 
                 section {
@@ -740,8 +823,18 @@
                 }
 
                 #t2v .feature-video {
-                    aspect-ratio: 1;
+                    aspect-ratio: 16 / 9;
                     max-height: calc(100vh - 64px);
+                }
+                
+                /* 优化文本部分在移动端的显示 */
+                .text {
+                    margin-bottom: 32px;
+                }
+                
+                /* 优化视频播放器在移动端的显示 */
+                .video-player {
+                    border-radius: 12px;
                 }
 
                 #long .text,
@@ -778,9 +871,11 @@
                     padding: 0 16px;
                     scroll-snap-type: x mandatory;
                     scrollbar-width: none;
+                    -webkit-overflow-scrolling: touch;
                 }
                 .grid:not(.grid-noslide) > * {
                     width: calc(100vw - 64px);
+                    max-width: 400px;
                     max-height: calc(100vh - 64px);
                     flex-shrink: 0;
                     scroll-snap-align: center;
@@ -796,6 +891,18 @@
                 .grid:not(.grid-noslide) *:not(:last-of-type) .video-player {
                     border-top-right-radius: 0;
                     border-bottom-right-radius: 0;
+                }
+                
+                /* 优化flex布局在移动端 */
+                .flex {
+                    flex-direction: column;
+                }
+                .flex .span25,
+                .flex .span35,
+                .flex .span32,
+                .flex .span55 {
+                    flex: 0 0 100%;
+                    width: 100%;
                 }
 
                 .audio-control .audio-button {
@@ -839,6 +946,8 @@
                     left: 16px;
                     width: calc(100vw - 32px);
                     text-align: center;
+                    font-size: 13px;
+                    padding: 10px 16px;
                 }
 
                 #shots a.external {
@@ -865,6 +974,43 @@
                     padding-left: 16px;
                     padding-right: 16px;
                     scrollbar-width: none;
+                    -webkit-overflow-scrolling: touch;
+                }
+                
+                /* 优化Abstract和Method部分在移动端 */
+                .section {
+                    padding: 32px 16px !important;
+                }
+                .section h1 {
+                    font-size: 22px;
+                    margin-bottom: 16px;
+                }
+                .section .content p {
+                    font-size: 14px;
+                    line-height: 22px;
+                    text-align: left;
+                }
+                .section .title.is-3 {
+                    font-size: 22px !important;
+                }
+                
+                /* 确保图片在移动端响应式 */
+                img {
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+            
+            /* 中等屏幕的适配 */
+            @media (min-width: 641px) and (max-width: 1024px) {
+                section {
+                    padding: 40px 24px;
+                }
+                #intro h1 {
+                    font-size: 42px;
+                }
+                h1 {
+                    font-size: 28px;
                 }
             }
         </style>
@@ -1098,11 +1244,11 @@
         </section>
 
 
-        <section class="section">
-            <div class="container is-max-desktop">
+        <section class="section" style="padding: 48px calc(50vw - min(45vw, 1600px / 2));">
+            <div class="container is-max-desktop" style="max-width: 100%;">
               <!-- Abstract. -->
-              <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
+              <div class="columns is-centered has-text-centered" style="margin: 0;">
+                <div class="column is-four-fifths" style="padding: 0;">
                   <h1>Abstract</h1>
                   <div class="content has-text-justified">
                     <p>
@@ -1121,19 +1267,19 @@
             </div>
         </section>
 
-        <section class="section">
-            <div class="container is-max-desktop">
-              <div class="columns is-centered has-text-centered">
+        <section class="section" style="padding: 48px calc(50vw - min(45vw, 1600px / 2));">
+            <div class="container is-max-desktop" style="max-width: 100%;">
+              <div class="columns is-centered has-text-centered" style="margin: 0;">
                 <!-- <div class="column is-four-fifths"> -->
-                <div class="column">
-                  <h1 class="title is-3">Method</h1>
+                <div class="column" style="padding: 0;">
+                  <h1 class="title is-3" style="font-size: 32px; font-weight: 400; margin: 0 0 24px 0;">Method</h1>
                   <div class="content has-text-justified">
                     <p>
                         In this work, we introduce AnyTalker, an audio-driven framework for generating multi-person talking videos. 
                         It presents a novel multi-stream structure called Audio-Face Cross Attention Layer that enables identity scaling while guaranteeing seamless cross-identity interactions. 
                     </p>
-                    <div class="column">
-                      <img src="static/method.png" width="100%"/>
+                    <div class="column" style="padding: 0; margin-top: 24px;">
+                      <img src="static/method.png" width="100%" style="display: block; max-width: 100%; height: auto;"/>
                     </div>
                   </div>          
                 </div>
